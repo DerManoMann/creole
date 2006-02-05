@@ -1,0 +1,28 @@
+
+  I N S T A L L I N G    C R E O L E
+  ==================================
+
+  Creole is very simple to install.  We will assume that if you are reading this
+  then you downloaded the full Creole package (rather than installed using the
+  PEAR installer).
+  
+  To use Creole you simply need to copy the classes/creole/ and classes/jargon/
+  directories to a location on your PHP include_path.
+  
+  For example, on my Linux system I might install Creole like this:
+  
+  $> tar zxvf creole-x.x.x.tar.gz
+  $> cd creole
+  $> mv classes/creole  /usr/local/lib/php/
+  $> mv classes/jargon /usr/local/lib/php/
+  
+  Same principle applies to Windows, but of course on Windows it's probably easier
+  to click .... drag .... drop.
+    
+  Alternatively you can edit your php.ini file to set your PHP include_path variable
+  to include the /path/to/creole/classes directory.
+  
+  That's all!  -- see http://creole.phpdb.org for usage examples and other project 
+  information.
+  
+  -- $Id: INSTALL,v 1.1 2004/03/20 04:09:57 hlellelid Exp $

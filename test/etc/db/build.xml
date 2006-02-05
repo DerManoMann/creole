@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!--
+	This file builds SQL definition and datadump files based on the model
+	XML files in the current directory.  We use Propel to build the 
+	SQL files.  This is a Phing buildfile, so of course Phing must also 
+	be installed to use it.
+	
+	Propel: http://propel.phpdb.org	
+	Phing: http://phing.info	
+-->
+
+<project name="creoletest" default="main" basedir=".">
+
+  <resolvepath propertyName="creole.dbtest.dir" file="."/>
+  
+  <!--
+    Note - You should not have to edit this file.
+    Instead, edit the build.properties that is in the same directory.
+  -->
+
+  <property file="build.properties"/>
+  <property file="default.properties"/>    
+	
+  <!-- ================================================================ -->
+  <!-- M A I N  T A R G E T                                             -->
+  <!-- ================================================================ -->
+
+  <target name="main" description="==> build Propel classes &amp; SQL" depends="databasecheck">
+	<phing dir="${propel.home}" phingfile="build-propel.xml" target="sql"/>
+  	<phing dir="${propel.home}" phingfile="build-propel.xml" target="datasql"/>
+  </target>
+
+  <!--
+	 ===================================================================
+	 Target: checks if language was given, otherwise fail
+	 ===================================================================
+	-->
+	<target name="databasecheck" unless="database">
+		<echo message="====================================================="/>
+		<echo message="RDBMS not specified. You must enter a database. In"/>
+		<echo message="the future you can add this to build.properties or"/>
+		<echo message="enter it on the command line: "/>
+		<echo message=" "/>
+		<echo message="-Ddatabase=mysql"/>
+		<echo message="====================================================="/>	
+		<input propertyname="database" promptChar=":">Database to build for</input>
+		
+		<property name="propel.database" value="${database}" override="true"/>
+		<property name="propel.sql.dir" value="${creole.dbtest.dir}/sql/${database}" override="true"/>
+	</target>
+	
+</project>

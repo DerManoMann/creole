@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<exchanges>	
+
+	 <!--============================
+		|    Generic Queries        |
+	    =============================-->
+	<exchange id="RecordCount">
+		<sql>SELECT COUNT(*) FROM products</sql>
+		<result>82</result>
+	</exchange>	
+	
+     <!--=============================
+		|    ConnectionTest          |
+	    =============================-->
+	<exchange id="ConnectionTest.getUpdateCount.UPDATE">
+		<sql>UPDATE products SET UnitPrice = 5 WHERE ProductID = 2</sql>
+		<result>1</result>
+	</exchange>
+	
+	<exchange id="ConnectionTest.getUpdateCount.DELETE">
+		<sql>DELETE FROM products WHERE CategoryID = 3</sql>
+		<result>13</result>
+	</exchange>
+	
+	<exchange id="ConnectionTest.getUpdateCount.INSERT">
+		<sql>INSERT INTO products (ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Notes,OrderDate) VALUES (9999,'Mai Tai Drink',1,1,'10 boxes x 20 bags',18.0000,39,-7,10,' ','2003-12-01')</sql>
+		<result>1</result>
+	</exchange>
+	
+	
+	<exchange id="ConnectionTest.setAutoCommit.DELTRAN1">
+		<sql>DELETE FROM products WHERE CategoryID = 3</sql>
+		<result>13</result>
+	</exchange>
+	
+	<exchange id="ConnectionTest.setAutoCommit.DELTRAN2">
+		<sql>DELETE FROM products WHERE ProductID = 2</sql>
+		<result>1</result>
+	</exchange>
+	
+     <!--============================
+		|    ResultSetTest           |
+	    =============================-->
+		
+	<exchange id="ResultSetTest.ALL_RECORDS">
+		<sql>SELECT * FROM products ORDER BY products.ProductID</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.SINGLE_RECORD">
+		<sql>SELECT * FROM products WHERE products.ProductID = %d</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.PRODUCT_ID.QUOTED">
+		<sql>SELECT &quot;ProductID&quot; FROM products ORDER BY products.ProductID</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.MIN_ID">
+		<sql>SELECT MIN(products.ProductID) FROM products</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.MAX_ID">
+		<sql>SELECT MAX(products.ProductID) FROM products</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getBoolean.FALSE">
+		<sql>SELECT products.Discontinued FROM products WHERE products.ProductID = 1</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getBoolean.TRUE">
+		<sql>SELECT products.Discontinued FROM products WHERE products.ProductID = 5</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getBlob">
+		<sql>SELECT blobtest.BlobData FROM blobtest WHERE BlobID = 1</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getClob">
+		<sql>SELECT clobtest.ClobData FROM clobtest WHERE ClobID = 1</sql>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getDate">
+		<sql>SELECT products.OrderDate FROM products WHERE products.ProductID = 1</sql>
+		<result>2001-12-01</result>
+	</exchange>	
+	
+	<exchange id="ResultSetTest.getDecimal">
+		<sql>SELECT products.UnitPrice FROM products WHERE products.ProductID = 5</sql>
+		<result>21.35</result>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getDouble">
+		<sql>SELECT products.UnitPrice FROM products WHERE products.ProductID = 5</sql>
+		<result>21.35</result>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getFloat">
+		<sql>SELECT products.UnitPrice FROM products WHERE products.ProductID = 5</sql>
+		<result>21.35</result>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getInt">
+		<sql>SELECT products.UnitsOnOrder FROM products WHERE products.ProductID = 1</sql>
+		<result>-7</result>
+	</exchange>
+	
+	<exchange id="ResultSetTest.getInteger">
+		<sql>SELECT products.UnitsInStock FROM products WHERE products.ProductID = 1</sql>
+		<result>39</result>
+	</exchange>
+		
+	<exchange id="ResultSetTest.getString">
+		<sql>SELECT products.ProductName FROM products WHERE products.ProductID = 1</sql>
+		<result>Chai Tea</result>
+	</exchange>
+	
+	<exchange id="ResultSetTest.setString.RTRIM">
+		<sql>UPDATE products SET ProductName = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="ResultSetTest.getString.RTRIM">
+		<sql>SELECT products.ProductName FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+     <!--=============================
+		|       StatementTest        |
+	    =============================-->
+			
+	<exchange id="StatementTest.executeQuery">
+		<sql>SELECT * FROM products WHERE products.ProductID = 1</sql>
+	</exchange>
+
+	<exchange id="StatementTest.executeUpdate">
+		<sql>UPDATE products SET ProductName = 'test' WHERE products.ProductID = 1</sql>
+	</exchange>
+	
+     <!--=============================
+		|   PreparedStatementTest    |
+	    =============================-->
+		
+	<exchange id="PreparedStatementTest.setBlob">
+		<sql>INSERT INTO blobtest (BlobID, BlobName, BlobData) VALUES (?,?,?)</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setClob">
+		<sql>INSERT INTO clobtest (ClobID, ClobName, ClobData) VALUES (?,?,?)</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.GET_BY_PKEY">
+		<sql>SELECT * FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setArray">
+		<sql>UPDATE products SET Notes = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getArray">
+		<sql>SELECT products.Notes FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+		
+	<exchange id="PreparedStatementTest.setBoolean">
+		<sql>UPDATE products SET Discontinued = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getBoolean">
+		<sql>SELECT products.Discontinued FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+		
+	<exchange id="PreparedStatementTest.setDate">
+		<sql>UPDATE products SET OrderDate = ? WHERE products.ProductID = ?</sql>
+	</exchange>	
+	<exchange id="PreparedStatementTest.getDate">
+		<sql>SELECT products.OrderDate FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setDecimal">
+		<sql>UPDATE products SET UnitPrice = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getDecimal">
+		<sql>SELECT products.UnitPrice FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+		
+	<exchange id="PreparedStatementTest.setDouble">
+		<sql>UPDATE products SET UnitPrice = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getDouble">
+		<sql>SELECT products.UnitPrice FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setFloat">
+		<sql>UPDATE products SET UnitPrice = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getFloat">
+		<sql>SELECT products.UnitPrice FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setInt">
+		<sql>UPDATE products SET UnitsInStock = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getInt">
+		<sql>SELECT products.UnitsInStock FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setInteger">
+		<sql>UPDATE products SET UnitsInStock = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getInteger">
+		<sql>SELECT products.UnitsInStock FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setNull">
+		<sql>UPDATE products SET Notes = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getNull">
+		<sql>SELECT products.Notes FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setString">
+		<sql>UPDATE products SET ProductName = ? WHERE products.ProductID = ?</sql>
+	</exchange>
+	<exchange id="PreparedStatementTest.getString">
+		<sql>SELECT products.ProductName FROM products WHERE products.ProductID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setTimestamp">
+		<sql>INSERT INTO temporaltest (ID, timestampcol) VALUES (?,?)</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.getTimestamp">
+		<sql>SELECT timestampcol FROM temporaltest WHERE ID = ?</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.setTime">
+		<sql>INSERT INTO temporaltest (ID, timecol) VALUES (?,?)</sql>
+	</exchange>
+	
+	<exchange id="PreparedStatementTest.getTime">
+		<sql>SELECT timecol FROM temporaltest WHERE ID = ?</sql>
+	</exchange>
+	
+	<!--=============================
+		|   IdGeneratorTest         |
+	    =============================-->
+		
+	<exchange id="IdGeneratorTest.getId.INIT">
+		<sql>SELECT MAX(ID) FROM idgentest</sql>
+	</exchange>
+			
+	<exchange id="IdGeneratorTest.getId.SEQUENCE">
+		<sql>INSERT INTO idgentest (ID, Name) VALUES (?, ?)</sql>
+	</exchange>
+
+	<exchange id="IdGeneratorTest.getId.AUTOINCREMENT">
+		<sql>INSERT INTO idgentest (Name) VALUES (?)</sql>
+	</exchange>
+	
+</exchanges>

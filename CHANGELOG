@@ -1,0 +1,164 @@
+Creole 1.0.2 - April 17, 2005
+-----------------------------
+
+2005-04-16 15:55:28 hlellelid
+
+	* Adding timezone information to the PgSQLPreparedstatement setTime() 
+	and setTimestamp() method so that now Creole supports the 'with time zone' 
+	columns in Postgres.
+	
+2005-04-16 13:27 hlellelid
+
+	*  Reverted PreparedStatementCommon->executeQuery() to previous signature
+	which supports first param being FETCHMODE.
+	
+2005-04-02 11:17 dlawson_mi
+
+	* Optimized caching in ODBCCachedResultSet.
+	* Added support for manual row counting in ODBCResultSet. This is helpful
+	  for ODBC drivers which don't return a valid count when odbc_num_rows()
+	  is called after a query.
+	  
+
+Creole 1.0.1 - Apr. 07, 2005
+----------------------------	
+
+2005-03-29 08:44  gamr
+
+	* slight rework in PreparedStatementCommon to save memory
+	* complete rewrite of sql parser in PreparedStatementCommon,
+	  10% faster parsing
+
+2005-03-09 14:15  hlellelid
+
+	* Fixed bug in PgSQLTableInfo index query.
+
+2005-03-01 07:29  micha
+
+	* MySQLTableInfo: Fixed bugs in initForeignKeys():
+	  - renamed TableInfo to MySQLTableInfo
+	  - added $this->database as first parameter of MySQLTableInfo
+	  - changed second parameter to $ftbl
+
+2005-02-25 10:47  pachanga
+
+	* vendor specific optional data attribute added to ColumnInfo,
+	  DatabaseInfo, ForeignKeyInfo, PrimaryKeyInfo classes, this
+	  information can be set in constructor and retrived with
+	  getVendorSpecificInfo() method
+
+2005-02-21 11:48  pachanga
+
+	* initial tests for MySQL metadata added: tests for indexes, uniques, 
+	  foreign keys, vendor specific metadata
+	* MySQL escaping added to all metadata retrieval classes
+	* MySQL index metadata retrieval fixes(this information was loaded 
+	  improperly)
+	* isAutoIncrement attribute added to CoumnInfo, set from 
+	  constructor, null by default
+	* isUnique attribute added to IndexInfo, set from constructor,
+	  false by default
+	* vendorSpecificInfo attribute added to
+	  IndexInfo, set from constructor, empty array by default
+	* TableInfo can retrieve vendor specific info via getVendorSpecificInfo()
+	  method 
+	* MySQL creole-schema.sql modified, added tables for better indexes,
+	  uniques, foreign keys and vendor specific data tests
+
+2005-02-10 04:22  pachanga
+
+	* MySql 'longtext' field support added
+
+2005-01-21 14:13  hlellelid
+
+	* Added cross-platform support for specifying port in mssql DSN.
+	  Submitted by:  Jon Whitcraft
+
+2005-01-13 09:40  micha
+
+	* Fixed 'undefined value $sql'.  Submitted: Martel Valgoerad
+
+2005-01-07 14:04  micha
+
+	* Fixed typo in require path for PgSQLResultSetIterator.
+
+2004-12-17 04:58  micha
+
+	* Submitted By:  Louis Bustin
+	  - Fixed typo in initForeignKeys()
+	  - Use hasTable() and hasColumn() in initForeignKeys()
+
+2004-12-04 00:58  gamr
+
+	* Added PgSQLResultSetIterator class
+
+2004-12-04 00:41  gamr
+
+	* [postgres] save having a query resource result in memory twice 
+
+2004-12-04 00:32  gamr
+
+	* Removed deprecated reference to pg_cmdtuples.
+
+2004-12-04 00:29  gamr
+
+	* Removed deprecated use of pg_exec.
+
+2004-12-03 11:54  gamr
+
+	* speed optimized SQLiteResultSetIterator (20%+)
+
+2004-12-03 11:28  gamr
+
+	* SQLiteResultSetIterator: fix the valid() function in the iterator 
+	  so we have all of our rows, it was skipping a row every time it was 
+	  called
+
+2004-11-29 08:41  micha
+
+	* SQLiteResultSet: Fixed unknown variable $this->conn->connection 
+	  ($this->conn->getResource())
+
+2004-11-29 08:40  micha
+
+	* SQLiteTableInfo: Fixed bug in where $default variable was unknown.
+
+2004-11-28 17:03  hlellelid
+
+	* Added hasTable() and hasColumn() methods to metadata classes.
+
+2004-11-28 11:24  hlellelid
+
+	* MySQLTableInfo: Added fix for initPrimaryKey() so that only 'PRIMARY' 
+	  keys are considered primary keys :)
+
+	  Submitted By: Tony Bibbs
+
+2004-11-28 11:21  hlellelid
+
+	* Added implementation of initForeignKeys() for supported versions of
+	  MySQL.
+
+	  Submitted By: Tony Bibbs
+
+2004-11-18 16:35  dlawson_mi
+
+	* ODBCPreparedStatement: Added ability to emulate prepared statements 
+	  if necessary. This is triggered by a function in ODBCAdapter.
+
+2004-11-04 13:51  revjim
+
+	* [Jargon] Altered all referenced of CONSTANTS in Record to use proper 
+	  namespaces (i.e. UPDATE becomes Record::UPDATE) in order to remove 
+	  E_NOTICE errors and provide proper operation (as the default is to 
+	  interpret the constant as a string).
+
+2004-11-04 13:42  revjim
+
+	* [Jargon] Altered all calls to "is_a" to use the new "instanceof" 
+	  conditional so that code will execute properly under E_STRICT.
+
+2004-10-25 21:42  hlellelid
+
+	* Changed setTimestamp() so that it escapes the value before inserting.
+

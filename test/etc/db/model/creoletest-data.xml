@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE dataset SYSTEM "file://bench-data.dtd">
+<dataset name="all">
+    <Products Productid="1" Productname="Chai Tea" Supplierid="1" Categoryid="1" Quantityperunit="10 boxes x 20 bags" Unitprice="18.0000" Unitsinstock="39" Unitsonorder="-7" Reorderlevel="10" Notes=" " Orderdate="2001-12-01"/>
+    <Products Productid="2" Productname="Changie" Supplierid="1" Categoryid="1" Quantityperunit="24 - 12 oz bottles" Unitprice="0.0000" Unitsinstock="17" Unitsonorder="40" Reorderlevel="25" Notes="Array"/>
+    <Products Productid="3" Productname="Aniseed Syrup" Supplierid="1" Categoryid="2" Quantityperunit="12 - 550 ml bottles" Unitprice="10.0000" Unitsinstock="13" Unitsonorder="70" Reorderlevel="25" Notes="Array" Orderdate="1970-01-01"/>
+    <Products Productid="4" Productname="Chef Anton" Supplierid="2" Categoryid="2" Quantityperunit="48 - 6 oz jars" Unitprice="21.0000" Unitsinstock="53" Unitsonorder="-60" Notes="Array" Orderdate="1970-01-01"/>
+    <Products Productid="5" Productname="Chef Anton's Sugar" Supplierid="2" Categoryid="2" Quantityperunit="36 boxes" Unitprice="21.3500" Unitsinstock="20" Unitsonorder="-20" Discontinued="1" Orderdate="1970-01-01"/>
+    <Products Productid="6" Productname="Grandma's Boysenberry Spread" Supplierid="3" Categoryid="2" Quantityperunit="12 - 8 oz jars" Unitprice="25.0000" Unitsinstock="120" Reorderlevel="25" Notes="oy" Orderdate="1970-01-01"/>
+    <Products Productid="7" Productname="Uncle Bob's Organic Dried Pears" Supplierid="3" Categoryid="7" Quantityperunit="12 - 1 lb pkgs." Unitprice="30.0000" Unitsinstock="15" Reorderlevel="10" />
+    <Products Productid="8" Productname="Northwoods Cranberry Sauce" Supplierid="3" Categoryid="2" Quantityperunit="12 - 12 oz jars" Unitprice="40.0000" Unitsinstock="6" Notes=" " Orderdate="2012-01-01"/>
+    <Products Productid="9" Productname="Mishi Kobe Niku" Supplierid="4" Categoryid="6" Quantityperunit="18 - 500 g pkgs." Unitprice="97.0000" Unitsinstock="29" Discontinued="1" />
+    <Products Productid="10" Productname="Ikura" Supplierid="4" Categoryid="8" Quantityperunit="12 - 200 ml jars" Unitprice="31.0000" Unitsinstock="31" />
+    <Products Productid="11" Productname="Queso Cabrales" Supplierid="5" Categoryid="4" Quantityperunit="1 kg pkg." Unitprice="21.0000" Unitsinstock="22" Unitsonorder="30" Reorderlevel="30" Notes=" " Orderdate="2011-12-21"/>
+    <Products Productid="12" Productname="Queso Manchego La Pastora" Supplierid="5" Categoryid="4" Quantityperunit="10 - 500 g pkgs." Unitprice="38.0000" Unitsinstock="86" />
+    <Products Productid="13" Productname="Konbu" Supplierid="6" Categoryid="8" Quantityperunit="2 kg box" Unitprice="6.0000" Unitsinstock="24" Reorderlevel="5" />
+    <Products Productid="14" Productname="Tofu" Supplierid="6" Categoryid="7" Quantityperunit="40 - 100 g pkgs." Unitprice="23.2500" Unitsinstock="35" />
+    <Products Productid="15" Productname="Genen Shouyu" Supplierid="6" Categoryid="2" Quantityperunit="24 - 250 ml bottles" Unitprice="15.5000" Unitsinstock="39" Reorderlevel="5" />
+    <Products Productid="16" Productname="Pavlova" Supplierid="7" Categoryid="3" Quantityperunit="32 - 500 g boxes" Unitprice="17.4500" Unitsinstock="29" Reorderlevel="10" />
+    <Products Productid="17" Productname="Alice Mutton" Supplierid="7" Categoryid="6" Quantityperunit="20 - 1 kg tins" Unitprice="39.0000" Discontinued="1" />
+    <Products Productid="18" Productname="Carnarvon Tigers" Supplierid="7" Categoryid="8" Quantityperunit="16 kg pkg." Unitprice="62.5000" Unitsinstock="42" />
+    <Products Productid="19" Productname="Teatime Chocolate Biscuits" Supplierid="8" Categoryid="3" Quantityperunit="10 boxes x 12 pieces" Unitprice="9.2000" Unitsinstock="25" Reorderlevel="5" />
+    <Products Productid="20" Productname="Sir Rodney's Marmalade" Supplierid="8" Categoryid="3" Quantityperunit="30 gift boxes" Unitprice="81.0000" Unitsinstock="40" />
+    <Products Productid="21" Productname="Sir Rodney's Scones" Supplierid="8" Categoryid="3" Quantityperunit="24 pkgs. x 4 pieces" Unitprice="10.0000" Unitsinstock="3" Unitsonorder="40" Reorderlevel="5" Notes=" " Orderdate="2000-01-30"/>
+    <Products Productid="22" Productname="Gustaf's Kn&auml;ckebr&ouml;d" Supplierid="9" Categoryid="5" Quantityperunit="24 - 500 g pkgs." Unitprice="21.0000" Unitsinstock="104" Reorderlevel="25" />
+    <Products Productid="23" Productname="Tunnbr&ouml;d" Supplierid="9" Categoryid="5" Quantityperunit="12 - 250 g pkgs." Unitprice="9.0000" Unitsinstock="61" Reorderlevel="25" />
+    <Products Productid="24" Productname="Guaran&aacute; Fant&aacute;stica" Supplierid="10" Categoryid="1" Quantityperunit="12 - 355 ml cans" Unitprice="4.5000" Unitsinstock="20" Discontinued="1" />
+    <Products Productid="25" Productname="NuNuCa Nu&szlig;-Nougat-Creme" Supplierid="11" Categoryid="3" Quantityperunit="20 - 450 g glasses" Unitprice="14.0000" Unitsinstock="76" Reorderlevel="30" />
+    <Products Productid="26" Productname="Gumb&auml;r Gummib&auml;rchen" Supplierid="11" Categoryid="3" Quantityperunit="100 - 250 g bags" Unitprice="31.2300" Unitsinstock="15" />
+    <Products Productid="27" Productname="Schoggi Schokolade" Supplierid="11" Categoryid="3" Quantityperunit="100 - 100 g pieces" Unitprice="43.9000" Unitsinstock="49" Reorderlevel="30" />
+    <Products Productid="28" Productname="R&ouml;ssle Sauerkraut" Supplierid="12" Categoryid="7" Quantityperunit="25 - 825 g cans" Unitprice="45.6000" Unitsinstock="26" Discontinued="1" />
+    <Products Productid="29" Productname="Th&uuml;ringer Rostbratwurst" Supplierid="12" Categoryid="6" Quantityperunit="50 bags x 30 sausgs." Unitprice="123.7900" Discontinued="1" />
+    <Products Productid="30" Productname="Nord-Ost Matjeshering" Supplierid="13" Categoryid="8" Quantityperunit="10 - 200 g glasses" Unitprice="25.8900" Unitsinstock="10" Reorderlevel="15" />
+    <Products Productid="31" Productname="Gorgonzola Telino" Supplierid="14" Categoryid="4" Quantityperunit="12 - 100 g pkgs" Unitprice="12.6000" Unitsonorder="70" Reorderlevel="20" Notes=" " Orderdate="2001-03-12"/>
+    <Products Productid="32" Productname="Mascarpone Fabioli" Supplierid="14" Categoryid="4" Quantityperunit="24 - 200 g pkgs." Unitprice="32.0000" Unitsinstock="9" Unitsonorder="40" Reorderlevel="25" />
+    <Products Productid="33" Productname="Geitost" Supplierid="15" Categoryid="4" Quantityperunit="500 g" Unitprice="2.5000" Unitsinstock="112" Reorderlevel="20" />
+    <Products Productid="34" Productname="Sasquatch Ale" Supplierid="16" Categoryid="1" Quantityperunit="24 - 12 oz bottles" Unitprice="14.0000" Unitsinstock="111" Reorderlevel="15" />
+    <Products Productid="35" Productname="Steeleye Stout" Supplierid="16" Categoryid="1" Quantityperunit="24 - 12 oz bottles" Unitprice="18.0000" Unitsinstock="20" Reorderlevel="15" />
+    <Products Productid="36" Productname="Inlagd Sill" Supplierid="17" Categoryid="8" Quantityperunit="24 - 250 g  jars" Unitprice="19.0000" Unitsinstock="112" Reorderlevel="20" />
+    <Products Productid="37" Productname="Gravad lax" Supplierid="17" Categoryid="8" Quantityperunit="12 - 500 g pkgs." Unitprice="26.0000" Unitsinstock="11" Unitsonorder="50" Reorderlevel="25" />
+    <Products Productid="38" Productname="C&ocirc;te de Blaye" Supplierid="18" Categoryid="1" Quantityperunit="12 - 75 cl bottles" Unitprice="263.5000" Unitsinstock="17" Reorderlevel="15" />
+    <Products Productid="39" Productname="Chartreuse verte" Supplierid="18" Categoryid="1" Quantityperunit="750 cc per bottle" Unitprice="18.0000" Unitsinstock="69" Reorderlevel="5" />
+    <Products Productid="40" Productname="Boston Crab Meat" Supplierid="19" Categoryid="8" Quantityperunit="24 - 4 oz tins" Unitprice="18.4000" Unitsinstock="123" Reorderlevel="30" />
+    <Products Productid="41" Productname="Jack's New England Clam Chowder" Supplierid="19" Categoryid="8" Quantityperunit="12 - 12 oz cans" Unitprice="9.6500" Unitsinstock="85" Reorderlevel="10" />
+    <Products Productid="42" Productname="Singaporean Hokkien Fried Mee" Supplierid="20" Categoryid="5" Quantityperunit="32 - 1 kg pkgs." Unitprice="14.0000" Unitsinstock="26" Discontinued="1" />
+    <Products Productid="43" Productname="Ipoh Coffee" Supplierid="20" Categoryid="1" Quantityperunit="16 - 500 g tins" Unitprice="46.0000" Unitsinstock="17" Unitsonorder="10" Reorderlevel="25" />
+    <Products Productid="44" Productname="Gula Malacca" Supplierid="20" Categoryid="2" Quantityperunit="20 - 2 kg bags" Unitprice="19.4500" Unitsinstock="27" Reorderlevel="15" />
+    <Products Productid="45" Productname="R&oslash;gede sild" Supplierid="21" Categoryid="8" Quantityperunit="1k pkg." Unitprice="9.5000" Unitsinstock="5" Unitsonorder="70" Reorderlevel="15" />
+    <Products Productid="46" Productname="Spegesild" Supplierid="21" Categoryid="8" Quantityperunit="4 - 450 g glasses" Unitprice="12.0000" Unitsinstock="95" />
+    <Products Productid="47" Productname="Zaanse koeken" Supplierid="22" Categoryid="3" Quantityperunit="10 - 4 oz boxes" Unitprice="9.5000" Unitsinstock="36" />
+    <Products Productid="48" Productname="Chocolade" Supplierid="22" Categoryid="3" Quantityperunit="10 pkgs." Unitprice="12.7500" Unitsinstock="15" Unitsonorder="70" Reorderlevel="25" />
+    <Products Productid="49" Productname="Maxilaku" Supplierid="23" Categoryid="3" Quantityperunit="24 - 50 g pkgs." Unitprice="20.0000" Unitsinstock="10" Unitsonorder="60" Reorderlevel="15" />
+    <Products Productid="50" Productname="Valkoinen suklaa" Supplierid="23" Categoryid="3" Quantityperunit="12 - 100 g bars" Unitprice="16.2500" Unitsinstock="65" Reorderlevel="30" />
+    <Products Productid="51" Productname="Manjimup Dried Apples" Supplierid="24" Categoryid="7" Quantityperunit="50 - 300 g pkgs." Unitprice="53.0000" Unitsinstock="20" Reorderlevel="10" />
+    <Products Productid="52" Productname="Filo Mix" Supplierid="24" Categoryid="5" Quantityperunit="16 - 2 kg boxes" Unitprice="7.0000" Unitsinstock="38" Reorderlevel="25" />
+    <Products Productid="53" Productname="Perth Pasties" Supplierid="24" Categoryid="6" Quantityperunit="48 pieces" Unitprice="32.8000" Discontinued="1" Notes=" " Orderdate="2000-01-10"/>
+    <Products Productid="54" Productname="Tourti&egrave;re" Supplierid="25" Categoryid="6" Quantityperunit="16 pies" Unitprice="7.4500" Unitsinstock="21" Reorderlevel="10" />
+    <Products Productid="55" Productname="P&acirc;t&eacute; chinois" Supplierid="25" Categoryid="6" Quantityperunit="24 boxes x 2 pies" Unitprice="24.0000" Unitsinstock="115" Reorderlevel="20" />
+    <Products Productid="56" Productname="Gnocchi di nonna Alice" Supplierid="26" Categoryid="5" Quantityperunit="24 - 250 g pkgs." Unitprice="38.0000" Unitsinstock="21" Unitsonorder="10" Reorderlevel="30" />
+    <Products Productid="57" Productname="Ravioli Angelo" Supplierid="26" Categoryid="5" Quantityperunit="24 - 250 g pkgs." Unitprice="19.5000" Unitsinstock="36" Reorderlevel="20" />
+    <Products Productid="58" Productname="Escargots de Bourgogne" Supplierid="27" Categoryid="8" Quantityperunit="24 pieces" Unitprice="13.2500" Unitsinstock="62" Reorderlevel="20" />
+    <Products Productid="59" Productname="Raclette Courdavault" Supplierid="28" Categoryid="4" Quantityperunit="5 kg pkg." Unitprice="55.0000" Unitsinstock="79" />
+    <Products Productid="60" Productname="Camembert Pierrot" Supplierid="28" Categoryid="4" Quantityperunit="15 - 300 g rounds" Unitprice="34.0000" Unitsinstock="19" />
+    <Products Productid="61" Productname="Sirop d'&eacute;rable" Supplierid="29" Categoryid="2" Quantityperunit="24 - 500 ml bottles" Unitprice="28.5000" Unitsinstock="113" Reorderlevel="25" />
+    <Products Productid="62" Productname="Tarte au sucre" Supplierid="29" Categoryid="3" Quantityperunit="48 pies" Unitprice="49.3000" Unitsinstock="17" />
+    <Products Productid="63" Productname="Vegie-spread" Supplierid="7" Categoryid="2" Quantityperunit="15 - 625 g jars" Unitprice="43.9000" Unitsinstock="24" Reorderlevel="5" />
+    <Products Productid="64" Productname="Wimmers gute Semmelkn&ouml;del" Supplierid="12" Categoryid="5" Quantityperunit="20 bags x 4 pieces" Unitprice="33.2500" Unitsinstock="22" Unitsonorder="80" Reorderlevel="30" />
+    <Products Productid="65" Productname="Louisiana Fiery Hot Pepper Sauce" Supplierid="2" Categoryid="2" Quantityperunit="32 - 8 oz bottles" Unitprice="21.0500" Unitsinstock="76" />
+    <Products Productid="66" Productname="Louisiana Hot Spiced Okra" Supplierid="2" Categoryid="2" Quantityperunit="24 - 8 oz jars" Unitprice="17.0000" Unitsinstock="4" Unitsonorder="100" Reorderlevel="20" />
+    <Products Productid="67" Productname="Laughing Lumberjack Lager" Supplierid="16" Categoryid="1" Quantityperunit="24 - 12 oz bottles" Unitprice="14.0000" Unitsinstock="52" Reorderlevel="10" />
+    <Products Productid="68" Productname="Scottish Longbreads" Supplierid="8" Categoryid="3" Quantityperunit="10 boxes x 8 pieces" Unitprice="12.5000" Unitsinstock="6" Unitsonorder="10" Reorderlevel="15" />
+    <Products Productid="69" Productname="Gudbrandsdalsost" Supplierid="15" Categoryid="4" Quantityperunit="10 kg pkg." Unitprice="36.0000" Unitsinstock="26" Reorderlevel="15" />
+    <Products Productid="70" Productname="Outback Lager" Supplierid="7" Categoryid="1" Quantityperunit="24 - 355 ml bottles" Unitprice="15.0000" Unitsinstock="15" Unitsonorder="10" Reorderlevel="30" />
+    <Products Productid="71" Productname="Fl&oslash;temysost" Supplierid="15" Categoryid="4" Quantityperunit="10 - 500 g pkgs." Unitprice="21.5000" Unitsinstock="26" />
+    <Products Productid="72" Productname="Mozzarella di Giovanni" Supplierid="14" Categoryid="4" Quantityperunit="24 - 200 g pkgs." Unitprice="34.8000" Unitsinstock="14" />
+    <Products Productid="73" Productname="R&ouml;d Kaviar" Supplierid="17" Categoryid="8" Quantityperunit="24 - 150 g jars" Unitprice="15.0000" Unitsinstock="101" Reorderlevel="5" />
+    <Products Productid="74" Productname="Longlife Tofu" Supplierid="4" Categoryid="7" Quantityperunit="5 kg pkg." Unitprice="10.0000" Unitsinstock="4" Unitsonorder="20" Reorderlevel="5" />
+    <Products Productid="75" Productname="Rh&ouml;nbr&auml;u Klosterbier" Supplierid="12" Categoryid="1" Quantityperunit="24 - 0.5 l bottles" Unitprice="7.7500" Unitsinstock="125" Reorderlevel="25" />
+    <Products Productid="76" Productname="Lakkalik&ouml;&ouml;ri" Supplierid="23" Categoryid="1" Quantityperunit="500 ml" Unitprice="18.0000" Unitsinstock="57" Reorderlevel="20" />
+    <Products Productid="77" Productname="Original Frankfurter gr&uuml;ne So&szlig;e" Supplierid="12" Categoryid="2" Quantityperunit="12 boxes" Unitprice="13.0000" Unitsinstock="32" Reorderlevel="15" />
+    <Products Productid="81" Productname="A Product 4" Supplierid="2" Categoryid="2" Unitprice="0.0000" Unitsinstock="4599" Orderdate="1970-01-01"/>
+    <Products Productid="83" Productname="A Product BB" Supplierid="1" Categoryid="1" Unitprice="0.0000" />
+    <Products Productid="84" Productname="A Product CC" Supplierid="1" Categoryid="1" Unitprice="0.0000" />
+    <Products Productid="86" Productname="Bad tea" Supplierid="1" Categoryid="1" Quantityperunit="10" Unitprice="0.0000" Orderdate="1970-01-01"/>
+    <Products Productid="89" Productname="PROD-AGFF" Supplierid="1" Categoryid="1" Quantityperunit="10" Unitprice="0.0000" Unitsinstock="33" Notes="Some notes" />
+</dataset>

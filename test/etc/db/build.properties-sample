@@ -1,0 +1,23 @@
+# -------------------------------------------------------------------
+#
+# C O N F I G U R A T I O N    F I L E
+#
+# -------------------------------------------------------------------
+# This file contains configuration information for creating the SQL
+# definition files based on XML models.
+# -------------------------------------------------------------------
+
+propel.home = /absolute/path/to/propel
+
+# -------------------------------------------------------------------
+#
+#  T A R G E T  D A T A B A S E
+#
+# -------------------------------------------------------------------
+# This is the target database, only considered when generating
+# the SQL for your Propel project. Your possible choices are:
+#
+#   mssql, mysql, oracle, postgresql, sybase
+# -------------------------------------------------------------------
+
+propel.database = ${database}

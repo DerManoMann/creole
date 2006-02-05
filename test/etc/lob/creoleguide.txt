@@ -1,0 +1,288 @@
++ %TITLE%
+
+Creole is inspired by Java's JDBC API.  If you are familiar with this API, then no doubt much of this will look similar.  While Creole seeks to work in the JDBC idiom, it also adopts some conventions and conveniences of the PEAR::DB and PEAR::MDB (both available at http://pear.php.net/) db abstraction packages.
+
+<toc>
+
+++ Connecting to the database
+
+Creole uses PEAR-style DSN arrays for connecting to the database.  Creole also provides a parseDSN() method (also from PEAR) for converting a connection URL to the DSN hash.
+
+<code>
+$dsn = array('phptype' => 'mysql',
+             'hostspec' => 'localhost',
+             'username' => 'dbuser',
+             'password' => 'dbpass',
+             'database' => 'testdb');
+
+$conn = DriverManager::getConnection($dsn);
+</code>
+
+This could also be written as:
+
+<code>
+$dsn = "mysql://dbuser:dbpass@localhost/testdb";
+$conn = DriverManager::getConnection($dsn);
+</code>
+
+The second parameter to DriverManager::getConnection() is a flags parameter.  Currently the only flag is Connection::PERSISTENT.
+
+<code>
+$conn = DriverManager::getConnection($dsn, Connection::PERSISTENT);
+</code>
+
+++ SELECTing Data
+
+Executing queries (SQL that returns results, as opposed to SQL that changes the database) is accomplished using the executeQuery() method.  The executeQuery() method will return a ResultSet subclass for your RDBMS.
+
++++ Basic Loop
+
+Here's a very basic query and result-fetch loop:
+
+<code>
+$rs = $conn->executeQuery("SELECT id, name FROM users");
+while($rs->next()) {
+  echo $rs->getString("name") . " (" . $rs->getInt("id") . ")\n"
+}
+</code>
+
++++ Execute Options
+
+There are a few options for executing queries using Creole:
+
+* Connection::executeQuery($sql)
+ * most direct execute method
+ * no support for specifying limit/offset
+ * no support for replacing params in SQL
+* Statement::executeQuery()
+ * Slightly more overhead, since Statement class instantiated: $conn->createStatement()->executeQuery($sql);
+* PreparedStatement::executeQuery()
+ * Recommended method for executing queries with values set from PHP script.
+
++++ Limiting Results
+
+Creole supports setting LIMIT/OFFSET for queries.  For drivers that support this in SQL, the SQL query will be modified.  For other drivers (e.g. MS SQL Server) the LIMIT/OFFSET will be emulated by the <noop>ResultSet</noop>.  The behavior of the <noop>ResultSet</noop> methods will be identical regardless of whether LIMIT/OFFSET is emulated or performed natively (in SQL).
+
+You must use a Statement object if you want to limit results.
+
+<code>
+// non-prepared statement
+$stmt = $conn->createStatement();
+$stmt->setLimit(10);
+$stmt->setOffset(5);
+
+$rs = $stmt->executeQuery("SELECT * FROM user");
+// for MySQL transformed to SELECT * FROM user LIMIT 10,5
+
+// prepared statement
+$stmt = $conn->prepareStatement("SELECT * FROM user WHERE id = ?");
+$stmt->setInt(1, $id);
+$stmt->setLimit(10);
+$stmt->setOffset(5);
+
+$rs = $stmt->executeQuery();
+</code>
+
+/Currently Creole does not support using OFFSET w/o LIMIT.  Some drivers (e.g. Oracle) can do this natively, but others (MySQL, PostgreSQL, SQLite) cannot./
+
++++ How many values returned?
+
+Use the getRecordCount() method to return the number of records returned by current SELECT statement.
+
+/If you specified a LIMIT/OFFSET then getRecordCount() will only return the number of results after LIMIT/OFFSET has been applied./
+
++++ Getting Column Values
+
+You can also use the generic <noop>ResultSet::get()</noop> method or even the public ResultSet::$fields property directly, if you do not want to perform any type conversions on the data you are returning:
+
+<code>
+while($rs->next()) {
+  echo $rs->get("name") . " (" . $rs->get("id") . ")\n";  
+}
+// or
+while ($rs->next()) {
+  foreach($rs->fields as $key => $value) {
+     print "$key: $value\n";
+  }
+}
+</code>
+
+++++ <noop>ResultSet</noop> Indexing
+
+By default results are indexed by field name.  You can specify numeric indexing when executing the query.
+
+Following JDBC convention, numerically indexed columns start with 1.
+
+<code>
+$sql = "SELECT login, login_stamp FROM user";
+$rs = $conn->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+
+while($rs->next()) {
+  print "Login: " . $rs->getString(1);
+  print "Last login: " . $rs->getTimestamp(2, "m/d/y H:i:s");
+}
+</code>
+
+/Creole does not support both numeric and assoc indexing (e.g. default results of mysql_fetch_array()) because not all drivers handle this natively./
+
++++ Scrolling <noop>ResultSet</noop> Methods
+
+Scrolling ResultSet features are supported well in MySQL, PostgreSQL, and SQLite.  For Oracle, however, this behavior has to be emulated.  For this reason, reverse scrolling is not currently supported in Oracle.
+
+<code>
+// Move to first record
+$rs->first();
+
+// Move ahead 3 rows
+$rs->relative(3);
+
+// Scroll backwards
+$rs->previous();
+
+// Move to last position
+$rs->last();
+
+</code>
+
+++ Updating the Database
+
+To perform a database update, use the executeUpdate() method.  executeUpdate() will return the number of affected rows, rather than a ResultSet.  Similar, to executeQuery(), there are several options for calling executeUpdate():
+
+<code>
+$numaffected = $conn->executeUpdate("DELETE from user");
+// or
+$stmt = $conn->createStatement();
+$numaffected = $stmt->executeUpdate("DELETE from user");
+// or
+$stmt = $conn->prepareStatement("DELETE form user WHERE id = ?");
+$stmt->setInt(1, 2);
+$numaffected = $stmt->executeUpdate();
+</code>
+
++++ More on PreparedStatements
+
+The recommended means of performing database queries and updates is using prepared queries.  Prepared queries will be emulated if the native driver does not support them; there is a very small performance penalty for the preparation, but you gain the ability to use the set*() (and generic set()) methods to ensure that data is properly formatted for the database.
+
+/You should always use the set*() methods to add values to a SQL statement, as this will prevent SQL injection attacks./
+
+++++ Basic Example
+
+<code>
+$stmt = $conn->prepareStatement("INSERT INTO users (id, name, crated) VALUES (?,?,?)");
+$stmt->setInt(1, $id);
+$stmt->setString(2, $name);
+$stmt->setTimestamp(3, time());
+$stmt->executeUpdate();
+</code>
+
+++++ Using Generic set() Method
+
+A generic set() method uses the PHP native type, to guess which setter method to invoke.
+
+<code>
+$stmt = $conn->prepareStatement("INSERT INTO users (id, name, created) VALUES (?,?,?)");
+
+$stmt->set(1, 2); // setInt()
+$stmt->set(2, "Myname"); // setString()
+
+include_once 'Date.php'; // using PEAR Date
+$stmt->set(3, new Date(time())); // setTimestamp()
+
+$stmt->executeUpdate();
+</code>
+
+++++ Using Parameters Array
+
+You may also pass an array of parameters to PreparedStatement::executeUpdate() and PreparedStatement::executeQuery().
+
+<code>
+$stmt = $conn->prepareStatement("INSERT INTO users (id, name, created) VALUES (?,?,?)");
+
+include_once 'Date.php'; // using PEAR Date
+
+$stmt->executeUpdate(array(2, "Myname", new Date(time()));
+</code>
+
+++ Stored Procedures
+
+Creole supports CallableStatement for invoking stored procedures on systems that have special stored procedure API.  Currently this only applies to MS SQL Server.  Unlike JDBC, Creole does not abstract the syntax for stored procedures.  Each RDBMS may have it's own syntax for bound variables, getting the return value, etc.
+
+/The following is based on the example for MSSQL stored procedures in the PHP online manual./
+
+Using the following stored procedure in an MS SQL Server database:
+
+<code>
+CREATE PROCEDURE [myprocedure] 
+( 
+   @sval varchar(50) OUTPUT, 
+   @intval int OUTPUT, 
+   @floatval decimal(6,4) OUTPUT 
+) AS 
+
+if @intval is null 
+    select '@intval is null' as answer 
+else     
+    select '@intval is NOT null' as answer 
+
+set @sval='Hello ' + @sval 
+set @intval=@intval+1 
+set @floatval=@floatval+1 
+
+return 10
+</code>
+
+You would use the following code to invoke and return the value for this stored procedure:
+
+<code>
+$stmt = $conn->prepareCall("myprocedure");
+
+// 3rd param, specifies whether we want
+// to get a return value for this parameter
+$stmt->setString("@sval", "Frank", true);
+$stmt->setInt("@intval", 11, true);
+$stmt->setFloat("@floatval", 2.1416, true);
+
+// for other (non-input) variables, you
+// use a registerOutParameter() method.  This method
+// does not apply to input variables (above)
+$stmt->registerOutParameter("RETVAL", CreoleTypes::INTEGER);
+    
+// get the returned results
+$result = $stmt->executeQuery(ResultSet::FETCHMODE_NUM); 
+$result->next();
+    
+print "Answer: " . $result->getString(1) . "\n"; 
+
+// MSSQL "quirk"
+// must advance to end of result sets (i.e. there could be more
+// than one result set returned by a stored proc).  If you do
+// not do this, then the output parameters will not be set (changed).
+$stmt->getMoreResults();
+
+// now the out-params can be fetched
+$val = $stmt->getInt("RETVAL");
+$ival = $stmt->getInt("@intval");
+$fval = $stmt->getFloat("@floatval");
+$sval = $stmt->getString("@sval");
+print "RETVAL = $val ; intval = $ival ; floatval = $fval ; string = $sval\n"; 
+</code>
+
+++ DB Metadata
+
+Creole offers a simpler metadata solution than the DatabaseMetadata and ResultSetMetadata JDBC classes.  The database "Info" classes are loosely based on some ((http://www.hibernate.org)(Hibernate)) (Java) classes, and provide very comprehensive data about a database.
+
+<code>
+$dbinfo = $conn->getDatabaseInfo();
+foreach($dbinfo->getTables() as $tbl) {
+    print "Table: " . $tbl->getName() . "\n";
+    foreach($tbl->getColumns() as $col) {
+        print "\t".$col->getName()." (".$col->getNativeType().")";
+        // see API docs for other methods
+    }
+    $pk = $tbl->getPrimaryKey();
+    foreach($pk->getColumns() as $pkcol) {
+        print "Pk col: ".$pkcol->getName();
+    }
+    // other TableInfo methods include getForeignKeys(), getIndexes().
+}
+</code>

@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+
+<!--
+	This build file packages the phing files, builds a package.xml for installation
+	using PEAR and creates the necessary TGZ files.
+-->	
+
+<project name="phing" basedir="." default="creole">
+	
+	<property name="build.base.dir" value="build"/>
+	<property name="pkgname" value="creole-${version}"/>		
+	<property name="build.src.dir" value="${build.base.dir}/${pkgname}"/>
+	
+	<fileset dir="classes/creole" id="creole-classes">	
+		<include name="**/*.php"/>
+		<exclude name="drivers/oracle/**"/>
+		<exclude name="drivers/mysqli/**"/>
+	</fileset>
+	
+	<!--
+		==============================================
+		Main entry point
+		==============================================
+	-->				
+	<target name="creole" if="version" depends="versioncheck">	
+		<phingcall target="build"/>
+		<phingcall target="package"/>
+		<phingcall target="tar"/>
+	</target>
+
+	<!--
+	 ===================================================================
+	 Target: checks if language was given, otherwise fail
+	 ===================================================================
+	-->
+	<target name="versioncheck" unless="version">
+		<echo message="====================================================="/>
+		<echo message="Version not specified. You must enter a version. In"/>
+		<echo message="the future you can add this to build.properties or"/>
+		<echo message="enter it on the command line: "/>
+		<echo message=" "/>
+		<echo message="-Dversion=2.0.0b1"/>
+		<echo message="====================================================="/>	
+		<input propertyname="version" promptChar=":">Version for package</input>
+		
+		<property name="pkgname" value="creole-${version}" override="true"/>		
+		<property name="build.src.dir" value="${build.base.dir}/${pkgname}" override="true"/>
+		
+	</target>
+  
+	<!--
+		==============================================
+		Copy the desired files into the build/ dir
+		making sure to put them in the directory
+		structure that will be needed for PEAR install
+		==============================================
+	-->	
+	<target name="build">
+		<echo>-----------------------------</echo>
+		<echo>| Creating directory layout |</echo>
+		<echo>-----------------------------</echo>
+		
+		<delete dir="${build.base.dir}"/>
+		
+		<copy todir="${build.src.dir}">			
+			<fileset refid="creole-classes"/>			
+		</copy>		
+		
+	</target>
+	
+	<!--
+		==============================================
+		Create a PEAR package.xml which will guide the
+		installation.
+		==============================================
+	-->	
+	<target name="package">
+	
+		<echo>-----------------------------</echo>
+		<echo>| Creating PEAR package.xml |</echo>
+		<echo>-----------------------------</echo>
+		<echo></echo>
+		<echo>...Don't hold your breath ...</echo>
+		<delete	file="${tarfile}"/>
+		<pearpkg name="creole" dir="${build.src.dir}" destFile="${build.base.dir}/package.xml">
+			
+			<fileset refid="creole-classes"/>
+			
+			<option name="notes">First stable release of Creole classes (does not include still-in-development Oracle and MySQLi drivers).</option>
+			
+			<!-- Set the simple options -->
+			<option name="description">Creole is a database abstraction layer for PHP5. It 
+abstracts PHP's native db-specific API to create more portable code while 
+also providing developers with a clean fully object-oriented interface based loosely 
+on the API for Java's JDBC.</option>
+			
+			<option name="summary">Database abstraction for PHP5</option>
+			<option name="version" value="${version}"/>
+			<option name="state" value="alpha"/>
+			<option name="license" value="LGPL"/>
+			
+			<!-- Set the complex options -->
+			<mapping name="maintainers">
+				<element>
+					<element key="handle" value="hlellelid"/>
+					<element key="name" value="Hans"/>
+					<element key="email" value="hans@xmpl.org"/>
+					<element key="role" value="lead"/>
+				</element>
+			</mapping>
+
+			<mapping name="deps">
+				<element>
+					<element key="type" value="php"/>
+					<element key="version" value="5.0.0"/>
+					<element key="rel" value="ge"/>
+				</element>				
+			</mapping>
+	
+		</pearpkg>
+	</target>
+	
+	<!--
+		==============================================
+		Create a tar.gz of the files, which will be 
+		installed by pear package manager.
+		==============================================
+	-->
+	<target name="tar">
+		<echo>-----------------------------</echo>
+		<echo>| Creating tar.gz package   |</echo>
+		<echo>-----------------------------</echo>	
+		<property name="tarfile" value="${build.base.dir}/${pkgname}-pear.tgz"/>
+		<delete	file="${tarfile}"/>
+		<tar destFile="${tarfile}" basedir="${build.base.dir}" />		
+	</target>
+	
+</project>
