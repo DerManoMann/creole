@@ -28,7 +28,7 @@ include_once 'phing/tasks/ext/pearpackage/Fileset.php';
  * @author   Hans Lellelid <hans@xmpl.org>
  * @version  $Revision$
  */
-class BuildCreolePEARPackageTask extends MatchingTask {
+class BuildJargonPEARPackageTask extends MatchingTask {
 
     /** Base directory for reading files. */
     private $dir;
@@ -51,7 +51,7 @@ class BuildCreolePEARPackageTask extends MatchingTask {
 
     private function setOptions($pkg){
 
-		$options['baseinstalldir'] = 'creole';
+		$options['baseinstalldir'] = 'jargon';
         $options['packagedirectory'] = $this->dir->getAbsolutePath();
 
         if (empty($this->filesets)) {
@@ -104,12 +104,9 @@ class BuildCreolePEARPackageTask extends MatchingTask {
 		$this->setOptions($package);
 
 		// the hard-coded stuff
-		$package->setPackage('creole');
-		$package->setSummary('Database abstraction for PHP5');
-		$package->setDescription("Creole is a database abstraction layer for PHP5. It
-abstracts PHP's native db-specific API to create more portable code while
-also providing developers with a clean fully object-oriented interface based loosely
-on the API for Java's JDBC.");
+		$package->setPackage('jargon');
+		$package->setSummary('Database convenience tools for Creole');
+		$package->setDescription("Jargon is an set of classes that extend the basic db abstraction provided by the Creole classes.  Jargon provides convenience methods inspired by PEAR DB/MDB methods (getOne(), getCol(), etc.), provides paged query support, and a simple set of DAO classes.");
 		$package->setChannel('pear.phpdb.org');
 		$package->setPackageType('php');
 
@@ -129,6 +126,8 @@ on the API for Java's JDBC.");
 		// "core" dependencies
 		$package->setPhpDep('5.0.0');
 		$package->setPearinstallerDep('1.4.0');
+
+		$package->addPackageDepWithChannel( 'required', 'creole', 'pear.phpdb.org', '1.1.0RC1');
 
 		$package->generateContents();
 
