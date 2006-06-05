@@ -61,7 +61,7 @@ class OCI8Types extends CreoleTypes {
      */
     public static function getType($nativeType)
     {
-        $t = strtolower($nativeType);
+        $t = str_replace(' ', '', strtolower($nativeType));
         if (isset(self::$typeMap[$t])) {
             return self::$typeMap[$t];
         } else {
