@@ -122,7 +122,7 @@ abstract class CreoleTypes {
          * @return int Creole native type (e.g. Types::LONGVARCHAR, Types::BINARY, etc.).
          */
         public static function getType($nativeType) {
-        	throw new Exception('This method must be overriden in subclasses!'); // abstract static not allowed since PHP 5.2
+        	throw new Exception('This method must be overridden in subclasses!'); // abstract static not allowed since PHP 5.2
         }
         
         /**
@@ -133,7 +133,7 @@ abstract class CreoleTypes {
          * @return string Native type string.
          */
         public static function getNativeType($creoleType) {
-        	 throw new Exception('This method must be overriden in subclasses!'); // abstract static not allowed since PHP 5.2
+        	 throw new Exception('This method must be overridden in subclasses!'); // abstract static not allowed since PHP 5.2
         }
         
         /**
