@@ -42,7 +42,7 @@ class SQLiteTableInfo extends TableInfo {
         // two separate queries.  The first gets names and default values
         // the second will fill in some more details.
         
-        $sql = "PRAGMA table_info('".$this->name."')'";
+        $sql = "PRAGMA table_info('".$this->name."')";
                 
         $res = sqlite_query($this->conn->getResource(), $sql);
         
